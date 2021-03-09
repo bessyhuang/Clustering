@@ -1,3 +1,6 @@
+# Reference: https://www.kaggle.com/jerrykuo7727/word2vec
+
+
 import pymongo_custom_module as PymongoCM
 import pandas as pd
 
@@ -5,11 +8,12 @@ from gensim.models.word2vec import Word2Vec
 
 
 Question_list, Q_WS_list, Category_list, AllField_list, Answer_list, A_WS_list = PymongoCM.get_mongodb_row("Library", "FAQ")
+
 FAQ_df = pd.DataFrame({"content": Q_WS_list, "category": Category_list, "ans_content": A_WS_list})
 
 # Generate a sample random row or column from the function caller data frame
 corpus = FAQ_df.sample(frac=1)
-print(corpus)
+#print(corpus)
 """
 DataFrame.sample(n=None, frac=None, replace=False, weights=None, random_state=None, axis=None)
 
@@ -20,9 +24,10 @@ n, frac：設定要抽樣出的筆數，兩者擇一使用。
 """
 
 # Train word2vec 
-model = Word2Vec(corpus.content, size=300, min_count=2, window=5, sg=1, workers=4) #min_count=20
+size = 350
+model = Word2Vec(corpus.content, size=size, min_count=10, window=1, sg=1, workers=5, iter=5) #min_count=20
 print('Vocabulary size:', len(model.wv.vocab))
-print('==>', model.wv.most_similar(positive=["研究"]))
+#print('==>', model.wv.most_similar(positive=["研究"]))
 
 def most_similar(w2v_model, words, topn=10):
     similar_df = pd.DataFrame()
@@ -34,7 +39,9 @@ def most_similar(w2v_model, words, topn=10):
             print(word, "not found in Word2Vec model!")
     return similar_df
 
-print(most_similar(model, ['研究', '開館', '時間', '借書', '館際合作', '多久', '幾本','網路', '連線', '小間', '逾期']))
+print(most_similar(model, ['研究', '開館', '時間', '借書', '館際合作']))
+print()
+print(most_similar(model, ['多久', '幾本','網路', '連線', '小間', '逾期']))
 
 # Save model
 model.save('word2vec.model')
@@ -44,7 +51,6 @@ model = Word2Vec.load('word2vec.model')
 
 
 # 視覺化
-# https://www.kaggle.com/jerrykuo7727/word2vec
 from sklearn.decomposition import PCA
 import numpy as np
 import matplotlib.pyplot as plt
@@ -91,13 +97,13 @@ FAQ_df['clean_msg_answer'] = FAQ_df.ans_content.apply(tp.text_process)
 def get_embedding_w2v(doc_tokens):
     embeddings = []
     if len(doc_tokens)<1:
-        return np.zeros(300)
+        return np.zeros(size)
     else:
         for tok in doc_tokens:
             if tok in model.wv.vocab:
                 embeddings.append(model.wv.word_vec(tok))
             else:
-                embeddings.append(np.random.rand(300))
+                embeddings.append(np.random.rand(size))
         # mean the vectors of individual words to get the vector of the document
         return np.mean(embeddings, axis=0)
 
