@@ -5,7 +5,7 @@ import pandas as pd
 from sklearn.cluster import DBSCAN
 
 
-Question_list, Q_WS_list, Category_list, AllField_list = PymongoCM.get_mongodb_row("Library", "FAQ")
+Question_list, Q_WS_list, A_WS_list, Category_list, AllField_list = PymongoCM.get_mongodb_row("Library", "FAQ")
 FAQ_df = pd.DataFrame({"content": Q_WS_list, "category": Category_list})
 
 print(FAQ_df)

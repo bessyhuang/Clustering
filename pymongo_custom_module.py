@@ -19,46 +19,37 @@ def get_mongodb_row(DatabaseName, CollectionName):
 
     Question_list = []
     Q_WS_list = []
+    A_WS_list = []
     Category_list = []
     AllField_list = []
-
+    
     for row in cursor:
         Question_list.append(row['Question'])
         Q_WS_list.append(row['Q_WS'])
+        A_WS_list.append(row['A_WS'])
         Category_list.append(row['Category'])
-        AllField_list.append((row['Question'], row['Q_WS'], row['Category'], row['_id']))
+        AllField_list.append((row['Question'], row['Q_WS'], row['A_WS'], row['Category'], row['_id']))
 
-    return Question_list, Q_WS_list, Category_list, AllField_list
+    return Question_list, Q_WS_list, A_WS_list, Category_list, AllField_list
     
 
-def get_and_append_mongodb_row():
+def get_and_append_mongodb_row(DatabaseName, CollectionName, frame):
+    client = MongoClient("localhost", 27017)
+    db = client[DatabaseName]
+    collection = db[CollectionName]
+    
     cursor = collection.find({}, {"Question":1, "Q_WS":1, "Category":1, "_id":1})
-
-    id_list = []
-    Question_list = []
-    Q_WS_list = []
-    Category_list = []
-    AllField_list = []
-    
+    id_list = []    
     for row in cursor:
         id_list.append(row["_id"])
-        Question_list.append(row['Question'])
-        Q_WS_list.append(row['Q_WS'])
-        Category_list.append(row['Category'])
-        AllField_list.append((row["Question"], row["Q_WS"], row["Category"], row["_id"]))
-         
-    return id_list, Question_list, Q_WS_list, Category_list, AllField_list
-
-"""
-id_list, Question_list, Q_WS_list, Category_list, AllFields_list = get_and_append_mongodb_row()
-frame['id'] = id_list
-print(frame.loc[0].Cluster, frame.loc[0].Question)
-
-for i in range(len(frame)):
-    cursor = collection.find({ "_id" : frame.loc[i].id }, { "Question":1, "Category":1, "_id":1})
-    # print('---', [i for i in cursor], frame.loc[i].Question, frame.loc[i].Cluster)
-    new_cluster_label = "Cluster {}".format(frame.loc[i].Cluster)
-    collection.update_many({ "_id" : frame.loc[i].id },
+        
+    frame['id'] = id_list
+    print(frame.loc[0].Cluster, frame.loc[0].Q)
+    for i in range(len(frame)):
+        cursor = collection.find({"_id":frame.loc[i].id}, {"Question":1, "Category":1, "_id":1})
+        # print('---', [i for i in cursor], frame.loc[i].Question, frame.loc[i].Cluster)
+        new_cluster_label = "Cluster {}".format(frame.loc[i].Cluster)
+        collection.update_many({ "_id" : frame.loc[i].id },
                            { "$set" : { "new_Cluster" : new_cluster_label } }, upsert=True)
-"""
-
+         
+    return "Complete!"
