@@ -195,5 +195,5 @@ while True:
 	results = query_tfidf(stemmed_query, invindex)
 	for rank, res in enumerate(results):
 		# e.g 排名 1 DOCID 176 SCORE 0.426 內容 South Korea rose 1% in February from a year earlier, the
-		print("排名 {:2d} DOCID {:8d} SCORE {:.3f} \n內容 {:}".format(rank+1, res[0], res[1], Q_list[res[0]][:50]))
+		print("排名 {:2d} DOCID {:8d} ClusterN {:8d} SCORE {:.3f} \n內容 {:}".format(rank+1, res[0], res[0]-1, res[1], Q_list[res[0]][:50]))
 	print()
