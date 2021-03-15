@@ -32,7 +32,7 @@ tfidf_vectorizer, X_tfidf, tfidf_array, tfidf_T_array, terms = tp.tfidf(Q_clean_
 
 
 # DBSCAN
-dbscan_clf = DBSCAN(eps=0.9, min_samples=2).fit(tfidf_array)
+dbscan_clf = DBSCAN(eps=0.85, min_samples=2).fit(tfidf_array)
 
 # display by group
 frame = pd.DataFrame(tfidf_array)
