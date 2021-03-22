@@ -1,0 +1,95 @@
+資料庫
+数据库
+ACID
+ADOdb
+Autocommit
+Bigtable
+CLSQL
+倒置檔
+Data store
+ER模型
+ETL
+法律数据库
+User:FBI-MAN2/Sandbox
+FileMaker
+GeneCards
+ImageNet
+InfluxDB
+Microsoft Azure SQL Database
+Microsoft Data Access Components
+Microsoft Jet Database Engine
+MSDE
+MySQLi
+ODBC
+ODS
+OLE DB
+关系模型
+RSSSF
+SQL
+Spanner (数据库)
+SQL CLR
+TiDB
+TimesTen
+三个世界理论 (信息学)
+两阶段锁
+中国党政领导干部资料库
+中国天然产物数据库
+互斥关系
+免疫组数据库
+关系 (数据库)
+关系数据库
+内存数据库
+函数依赖
+分布式数据库
+列 (資料庫)
+列式数据库
+动态库
+參數化查詢
+可串行性
+国际数学及统计程序库数字库
+国际贸易协会联盟
+国际贸易网站
+图数据库
+多媒体数据库系统
+多模型数据库
+多版本并发控制
+大數據
+實體完整性
+对象关系映射
+对象数据库
+封锁 (数据库)
+封闭世界假定
+User:小朱/sandbox6
+层次模型
+嵌入式SQL
+开放数据库许可证
+微生物天然产物数据库
+快照隔离
+指標 (資料庫)
+排他锁
+数据仓库一体机
+数据库事务
+数据库服务器
+数据库表
+数据库转储
+数据库连接
+数据访问层
+数据集成
+數據庫完整性
+文本数据库
+查詢語言
+每秒事务处理量
+知识库
+線上交易處理
+線上分析處理
+脏数据
+行 (資料庫)
+表空间
+觀測指標標識符邏輯命名與編碼系統
+视图
+触发器 (数据库)
+資料存取
+資料定義語言
+資料控制語言
+資料超市
+配置管理数据库

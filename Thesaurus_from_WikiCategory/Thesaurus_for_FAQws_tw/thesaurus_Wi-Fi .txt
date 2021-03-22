@@ -1,0 +1,29 @@
+Wi-Fi 
+Template:802.11網路標準
+AirPort
+DD-WRT
+熱點 (Wi-Fi)
+I-Shanghai
+IEEE 802.11
+IEEE 802.11ac
+IEEE 802.11af
+IEEE 802.11ah
+IEEE 802.11ax
+IEEE 802.11ay
+IEEE 802.11n
+IEEE 802.11p
+IPhone
+KRACK
+LEDE
+MiFi
+Miracast
+任天堂Wi-Fi連線
+Super G (無線網路)
+Tomato
+Wi-Fi
+Wi-Fi保護設定
+Wi-Fi直連
+Wi-Fi聯盟
+無線千兆聯盟
+無線接入點
+隔空播放

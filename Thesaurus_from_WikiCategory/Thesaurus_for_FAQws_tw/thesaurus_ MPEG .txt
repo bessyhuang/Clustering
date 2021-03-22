@@ -1,0 +1,28 @@
+ MPEG 
+User:AkaDonlon/H.266
+ATSC
+H.264/MPEG-4 AVC
+M4V
+MP3
+MP4
+MPEG
+MPEG LA
+MPEG-1
+MPEG-1 Audio Layer II
+MPEG-2
+MPEG-21
+MPEG-3
+MPEG-4
+MPEG-H
+MPEG2-TS
+影象群組
+基於HTTP的動態自適應流
+多功能影片編碼
+服務描述表
+網路資訊表
+節目專用資訊
+節目關聯表
+進階音訊編碼
+高效率影象檔案格式
+高效率視訊編碼的層級與等級
+高效率影片編碼

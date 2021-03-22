@@ -1,0 +1,8 @@
+中斷
+Intel 8259
+BIOS中斷呼叫
+DOS API
+INT 10H
+Jiffy
+處理器間中斷
+延遲過程呼叫

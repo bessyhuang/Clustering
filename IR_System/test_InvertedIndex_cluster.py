@@ -77,7 +77,7 @@ vocab = defaultdict(int)
 for term in norm_doc_str.split():
 	if term not in vocab:
 		vocab[term] = len(vocab)
-# print(vocab)
+print(vocab)
 # print(len(vocab_freqs[0]))
 
 
@@ -131,6 +131,7 @@ class InvertedIndex:
 
 	def f_t(self, term): 
 		term_id = self.vocab[term]
+		print('###', term, 'term_id:', term_id, 'doc_freqs:', self.doc_freqs)
 		return self.doc_freqs[term_id]
 
 	def space_in_bytes(self):
@@ -172,8 +173,9 @@ def query_tfidf(query, index, k=10):
 	for term in query:
 		i = 0
 		f_t = index.f_t(term)
+		print('+++', term, f_t)
 		for docid in index.docids(term):
-			# f_(d,t)
+			#f_(d,t)
 			f_d_t = index.freqs(term)[i]
 			d = index.doc_len[docid]
 			tfidf_cal = log(1+f_d_t) * log(N/f_t) / sqrt(d)

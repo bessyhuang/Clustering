@@ -1,0 +1,50 @@
+伺服器
+應用程式伺服器
+伺服器
+主從式架構
+資料中心
+伺服器農場
+AirPort Time Capsule
+Apache Avalon
+Gearman
+Hypixel
+Hypervisor
+IBM WebSphere Application Server
+Microsoft Personal Web Server
+Orthanc
+ProLiant
+SAP Web應用伺服器
+SignalR
+SPDY
+Sun Enterprise
+Xserve
+上傳
+下載
+專有伺服器
+臨床術語伺服器
+主機託管
+代理伺服器
+傳真伺服器
+刀鋒伺服器
+名稱伺服器
+域控制器
+媒體伺服器
+家庭資料中心
+家用伺服器
+資料庫伺服器
+檔案傳輸協議
+檔案伺服器
+無狀態協議
+時間伺服器
+Wikipedia:伺服器
+伺服器開發
+伺服器日誌
+伺服器機房
+伺服器端渲染
+術語伺服器
+機架單位
+虛擬專用伺服器
+虛擬主機
+負載均衡
+跳板機
+驗證伺服器

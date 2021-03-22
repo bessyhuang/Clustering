@@ -1,0 +1,65 @@
+ iOS
+IPhone OS 1
+IPhone OS 2
+AirPrint
+Animoji
+App Store (iOS/iPadOS)
+Apple推播通知服務
+CarPlay
+Cydia
+Firstory
+Game Center
+HomeKit
+IDevice
+IOS
+IOS 10
+IOS 11
+IOS 12
+IOS 13
+IOS 14
+IOS 4
+IOS 5
+IOS 6
+IOS 7
+IOS 8
+IOS 9
+IOS和iPadOS裝置列表
+IOS開發者計劃
+IOS版本歷史
+IOS軟體開發工具包
+IPad
+IPad (第一代)
+IPad (第七代)
+IPad (第三代)
+IPad (第五代)
+IPad (第八代)
+IPad (第六代)
+IPad (第四代)
+IPad 2
+IPad Air (第三代)
+IPad Air (第四代)
+IPad mini (第五代)
+IPad Pro
+IPhone
+IPhone 11
+IPhone 11 Pro
+IPhone 12
+IPhone 12 Pro
+IPhone 4
+IPhone 5
+IPhone 6s
+IPhone 7
+IPhone 8
+IPhone OS 3
+IPhone SE
+IPhone SE (第二代)
+IPhone X
+IPhone XR
+IPhone XS
+IPod touch (第七代)
+Metal (API)
+Touch ID
+樂天Kobo電子書
+蘋果檔案系統
+隔空投送
+面容 ID

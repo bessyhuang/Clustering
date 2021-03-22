@@ -1,0 +1,10 @@
+音效卡
+音效卡
+AC97
+AdLib
+FFADO
+HD Audio
+NVIDIA SoundStorm
+Sound Blaster
+Template:Sound-tech-stub
+耳麥

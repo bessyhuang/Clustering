@@ -1,0 +1,28 @@
+Wi-Fi
+Template:802.11网络标准
+AirPort
+DD-WRT
+热点 (Wi-Fi)
+I-Shanghai
+IEEE 802.11
+IEEE 802.11ac
+IEEE 802.11af
+IEEE 802.11ah
+IEEE 802.11ax
+IEEE 802.11ay
+IEEE 802.11n
+IEEE 802.11p
+IPhone
+KRACK
+LEDE
+MiFi
+Miracast
+任天堂Wi-Fi连接
+Super G (無線網絡)
+Tomato
+Wi-Fi保护设置
+Wi-Fi直连
+Wi-Fi联盟
+无线千兆联盟
+無線接入點
+隔空播放

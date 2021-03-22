@@ -1,0 +1,202 @@
+自由軟體
+下一页
+自由软件
+自由软件托管服务比较
+AbiWord
+Advanced Strategic Command
+Aegisub
+Allegro
+Alluxio
+AMSN
+AOKP
+Apache OpenOffice
+Apport
+AppStream
+Armagetron Advanced
+Asterisk
+Babel (編譯器)
+Beamer (LaTeX)
+Beep Media Player
+寶石方塊
+Blob Wars
+Blood Frontier
+BlueGriffon
+BMPx
+Bos Wars
+Brave浏览器
+Bygfoot
+BZFlag
+Crimson Fields
+刺猬大作战
+協作版本系統
+Cartes du Ciel
+Chakra GNU/Linux
+CKEditor
+Claws Mail
+CMake
+Cocos2d
+Conary
+Construct
+CPAN
+CPlay
+Crack Attack!
+Croscore字型
+Crystal Space
+CTerm
+Cygwin/X
+Debian自由软件指导方针
+Dabr
+Defraggler
+DejaVu字体
+Deluge
+Denemo
+Deno
+Dia (軟體)
+Diaspora (软件)
+Djl
+Docker
+Egret
+Emesene
+Enigma (游戏)
+Ffmpeg2theora
+FastCopy
+FileZilla
+Firefox Portable
+Fish Fillets NG
+Flask
+Flatpak
+FlightGear
+Fluentd
+Flutter
+FluxBB
+Fontconfig
+FooBillard
+Free Pascal
+Freeciv
+FreeCol
+Freenode
+Frozen Bubble
+Gambas
+Game Blender
+Gbrainy
+Gcin
+GCompris
+Geant4
+Geany
+Gerris
+GIMP
+Glest
+GlobaLeaks
+Globulation 2
+Gnash
+GNOME游戏
+GNU GRUB
+GNU IceCat
+GnuCash
+GNU宣言
+Godot
+Golly
+Graphviz
+GRASS
+Grub4Dos
+GStreamer
+GtkRadiant
+GvSIG
+Habitica
+Hercules (模擬器)
+Hex-a-hop
+HLSL2GLSL
+House (操作系统)
+Htop
+Hugin
+Hunspell
+Id Tech 2引擎
+Id Tech 3引擎
+InfraRecorder
+InnoDB
+User:Interface Designer/草案
+JavaForge
+Jellyfin
+JNode
+Jsoup
+Kafka
+KBounce
+KDE
+KDE Software Compilation
+Kdeadmin
+Kdeartwork
+Kdegraphics
+Kdemultimedia
+Kdenetwork
+KDESvn
+Kdetoys
+Kdeutils
+Kdewebdev
+KDE游戏
+Kiki the nano bot
+Kite Story
+Kiten
+Kiwix
+KolourPaint
+KompoZer
+KPackage
+KStars
+Kubernetes
+百戰小旅鼠
+LAMP
+Libavcodec
+LibreCAD
+LibreOffice Base
+LibreOffice Calc
+LimeWire
+Lincity
+LingCloud
+Linux From Scratch
+Linux中文延伸套件計劃
+Linux中文文件計劃
+Liquid War
+LiquidFeedback
+LIRC
+LogicalDOC
+LordsAWar
+LyX
+M.U.G.E.N
+Mastodon
+MEAN
+MeshLab
+Midori
+Mirai (恶意软件)
+Miro
+MirrorBrain
+MKVToolNix
+Mozilla Sunbird
+Mp3tag
+MRTG
+Mtpaint
+MuseScore
+Mycroft
+MythTV
+Nexuiz
+共享體
+Native Client
+Nelly's Rooftop Garden
+NeoeEdit
+NetHack
+NetPanzer
+Neverball
+Noegnud
+Novell Evolution
+NuFW
+Nuvola
+Nvu
+Odoo
+OGRE
+Oolite
+Open JTAG
+OpenArena
+OpenBTS
+OpenBVE
+OpenCity
+OpenFOAM
+OpenOffice.org Base
+OpenOffice.org Calc
