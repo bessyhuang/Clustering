@@ -10,8 +10,9 @@ import requests
 from lxml import html
 
 
-w = open('thesaurus.txt', 'w', encoding='utf-8')
 
+### Category (Wikipedia) ###
+w = open('thesaurus.txt', 'w', encoding='utf-8')
 
 def subcat(key):
     s = requests.session()
@@ -50,3 +51,23 @@ subcat('茶飲料')
 for t in term:
     w.write(t+'\n')
 # =============================================================================
+
+### Redirect (Wikipedia) ###
+# https://stackoverflow.com/questions/47537644/python-how-to-get-the-page-wikipedia-will-redirect-me-to
+
+KEYWORD = 'vpn'
+query = requests.get(r'https://zh.wikipedia.org/w/api.php?action=query&titles={}&&redirects&format=json'.format(KEYWORD))
+data = json.loads(query.text)
+print(data)
+
+res = requests.get('https://zh.wikipedia.org/wiki/' + KEYWORD)
+doc = html.fromstring(res.content)
+
+for t in doc.xpath("//html/head/title"):
+    print(t.text)
+for t in doc.xpath("//*[@id='firstHeading']"):
+    print(t.text)
+    
+for t in doc.xpath("//link[contains(@rel, 'canonical')]"):
+    new_url = str(t.attrib['href'])
+    print(new_url)
