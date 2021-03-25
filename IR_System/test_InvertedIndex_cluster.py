@@ -4,8 +4,8 @@ import pandas as pd
 
 from collections import Counter, defaultdict
 
-Question_list, Q_WS_list, A_WS_list, Category_list, new_Cluster_list, AllField_list = PymongoCM.get_mongodb_row("Library", "FAQ")
-FAQ_df = pd.DataFrame({"content": Q_WS_list, "new_Cluster": new_Cluster_list})
+Question_list, Q_WS_list, Answer_list, new_Cluster_list, AllField_list = PymongoCM.get_mongodb_row("Library", "FAQ")
+FAQ_df = pd.DataFrame({"content": Q_WS_list, "new_Cluster": new_Cluster_list, "answer": Answer_list})
 
 FAQ_df["clean_msg"] = FAQ_df.content.apply(tp.text_process)
 
@@ -97,15 +97,22 @@ class InvertedIndex:
         
         for docid, term_freqs in enumerate(doc_TF):
             #print('~~~', docid, term_freqs)
+            #term_freqs_Output: ~~~ 530 Counter({'書': 6, '有': 5, '嗎': 5, '我': 4, '想': 4, '找': 4, '館藏': 4, '圖書館': 4, '這': 4, '本': 4, '請問': 2, '在': 1, '的': 1, '裡': 1})
+            
             doc_len = sum(term_freqs.values())
+            #print(doc_len)
+            #doc_len_Output: 49
+            
             self.max_doc_len = max(doc_len, self.max_doc_len)
             self.doc_len[docid] = doc_len
+            
             self.total_num_docs += 1
             for term, freq in term_freqs.items():
-                term_id = vocab[term]
-                self.doc_ids[term_id].append(docid)
-                self.doc_TF[term_id].append(freq)
-                self.doc_freqs[term_id] += 1
+                term_ID = vocab[term]
+                self.doc_ids[term_ID].append(docid)
+                self.doc_TF[term_ID].append(freq)
+                
+                self.doc_freqs[term_ID] += 1
         
         """
         ### TEST: 各個詞(vpn) 分別出現在多少文件中 ###
@@ -115,13 +122,16 @@ class InvertedIndex:
         
         ### TEST: 各個詞(vpn) 分別出現在哪些 文件ID 中 ###
         #print('\n>>>\t', self.doc_ids)
-                
-        ### TEST: 詞(vpn) 出現在哪些文件裡，其 文件ID 為何？ ###
-        print('\n>>>\t', self.doc_ids[self.vocab['vpn']])
         
-        ### TEST: 詞(vpn) 出現在每份文件中的 出現次數 為何？ ###
-        print('\n+++\t', self.term_in_each_doc_TermFreqs('vpn'))
-	"""
+        ### TEST: 詞(vpn) 出現在哪些文件裡，其 "文件ID" 為何？ ###
+        print('\n>>>\t', self.doc_ids[self.vocab['vpn']] == [1, 6, 7, 16, 33])
+        
+        ### TEST: 詞(vpn) 出現在每份文件中的 "出現次數" 為何？ ###
+        print('\n+++\t', self.term_in_each_doc_TermFreqs('vpn') == [17, 2, 2, 2, 1] == self.doc_TF[117])
+        
+	### TEST: doc_id = 530 (第 530 群) 的 文件長度 為何？ ###
+        print('\n+++\t', self.doc_len[530], '個詞')
+        """
 
     def num_docs(self):
         return self.total_num_docs
@@ -136,7 +146,8 @@ class InvertedIndex:
 
     def term_show_in_N_docs(self, term): 
         term_ID = self.vocab[term]
-        #print('### term = {}\t term_ID = {}\n各個詞 (每個 vocab) 分別出現在多少文件中：\n{}'.format(term, term_ID, self.doc_freqs))
+        #print('\n### term = {}\t term_ID = {}\n各個詞 (每個 vocab) 分別出現在 幾份文件 中 = {}\n'.format(term, term_ID, self.doc_freqs))
+        #print(self.doc_freqs[term_ID] == len(self.doc_ids[term_ID]))
         return self.doc_freqs[term_ID]
 	
 # Inverted Index 相關訊息
@@ -149,7 +160,7 @@ print("Number of unique terms = {}".format(INV_INDEX.vocab_len))
 from math import log, sqrt
 
 # 給定一個查詢(String)和一個索引(Class)，回傳k個文件 (先找term索引_確定檢索範圍，再計算doc_tfidf_排序相似度)
-def query_tfidf(query, invindex, k=10):
+def query_tfidf(query, invindex, k=5):
     # scores 儲存了 docID 和他們的 TF-IDF分數
     scores = Counter()
     N = invindex.num_docs() # Cluster -1 ~ Cluster 529 => 531 個
@@ -169,18 +180,40 @@ def query_tfidf(query, invindex, k=10):
     return scores.most_common(k)
 print()
 
-
-# 查詢語句
+print('---------------------------\n')
+# 問題
 Q_list = []
 for doc in FAQ_cluster_df.content:
-	Q_list.append(''.join(doc))
+    Q_list.append(''.join(doc))
+    
+# 回答
+A_list = []
+sectors = FAQ_df.groupby('new_Cluster')
+sectors_len = len(sectors)
+for ClusterN in range(-1, sectors_len -1, 1):
+    ClusterN_index = list(sectors.get_group('Cluster {}'.format(ClusterN)).index)[0]
+    # print(FAQ_df.loc[ClusterN_index].answer)
+    A_list.append(FAQ_df.loc[ClusterN_index].answer)
+	
+# 查詢語句
 while True:
-	query = input("Input:\n")
-	# 預處理查詢，為了讓查詢跟索引內容相同
-	stemmed_query = query.split()
-	results = query_tfidf(stemmed_query, INV_INDEX)
-	for rank, res in enumerate(results):
-		# e.g 排名 1 DOCID 176 SCORE 0.426 內容 South Korea rose 1% in February from a year earlier, the
-		print("排名 {:2d} DOCID {:8d} ClusterN {:8d} SCORE {:.3f} \n內容 {:}".format(rank+1, res[0], res[0]-1, res[1], Q_list[res[0]][:50]))
-	print()
-
+    query = input("Input:\n")
+    # 預處理查詢，為了讓查詢跟索引內容相同
+    clean_query1 = query.split() 
+    clean_query2 = list(''.join(tp.text_process(clean_query1)).split())
+    #print(clean_query1, clean_query2)
+    print('---------------------------\n')
+    # ----- 查詢館藏的關鍵字擷取 -----------------------------------
+    search_FJULIB_KEYWORD = ""
+    for w in clean_query2:
+        if w not in vocab.keys():
+            search_FJULIB_KEYWORD += w
+    print('\n查詢館藏的關鍵字擷取：', search_FJULIB_KEYWORD)
+    # -------------------------------------------------------------
+    print('---------------------------\n')
+    results = query_tfidf(clean_query2, INV_INDEX)
+    for rank, res in enumerate(results):
+        if res[0]-1 == 529:
+            A_list[res[0]] += search_FJULIB_KEYWORD
+        print("排名 {:2d} DOCID {:8d} ClusterN {:8d} SCORE {:.3f} \n內容 {:}\n回覆 {:}\n".format(rank+1, res[0], res[0]-1, res[1], Q_list[res[0]][:50], A_list[res[0]]))
+    print()
