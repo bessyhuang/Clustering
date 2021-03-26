@@ -3,8 +3,9 @@ import text_preprocess as tp
 import pandas as pd
 
 from collections import Counter, defaultdict
+import pickle
 
-Question_list, Q_WS_list, Answer_list, new_Cluster_list, AllField_list = PymongoCM.get_mongodb_row("Library", "FAQ")
+Question_list, Q_WS_list, A_WS_list, Answer_list, new_Cluster_list, AllField_list = PymongoCM.get_mongodb_row("Library", "FAQ")
 FAQ_df = pd.DataFrame({"content": Q_WS_list, "new_Cluster": new_Cluster_list, "answer": Answer_list})
 
 FAQ_df["clean_msg"] = FAQ_df.content.apply(tp.text_process)
@@ -180,7 +181,9 @@ def query_tfidf(query, invindex, k=5):
     return scores.most_common(k)
 print()
 
-print('---------------------------\n')
+
+
+print('=====================================================')
 # 問題
 Q_list = []
 for doc in FAQ_cluster_df.content:
@@ -194,26 +197,97 @@ for ClusterN in range(-1, sectors_len -1, 1):
     ClusterN_index = list(sectors.get_group('Cluster {}'.format(ClusterN)).index)[0]
     # print(FAQ_df.loc[ClusterN_index].answer)
     A_list.append(FAQ_df.loc[ClusterN_index].answer)
-	
+
+
+
+# ----- wikipedia 擴展關鍵詞 ---------------------------------
+with open('./food_dict.pkl', 'rb') as fp:
+    wiki_food_dict = pickle.load(fp)
+fp.close()
+
+
+subCategory_dict = defaultdict(str)
+for key, subcat_items in wiki_food_dict.items():
+    for item in subcat_items:
+        subCategory_dict[item] = key
+# print(subCategory_dict)
+
+
+wiki_GroupCategory_list = []
+for key in wiki_food_dict.keys():
+    wiki_GroupCategory_list.append(wiki_food_dict[key] + [key])
+# print('wiki_category_list = ', wiki_GroupCategory_list)
+
+
+total_wiki = []
+for i in wiki_GroupCategory_list:
+    total_wiki += i
+# print('total_wiki = ', total_wiki)
+
+
+custom_match_dict = {'零食':'食物', '飲料':'飲料'} # wiki_category : FAQ_vocab
+# ------------------------------------------------------------
+
+
+
+# ----- 查詢館藏的停用詞擷取 -----------------------------------
+cluster529_stopwords = set()
+Cluster529 = list(sectors.get_group('Cluster 529').content)[0]
+for ws in Cluster529:
+    cluster529_stopwords.add(ws)
+# print('***', cluster529_stopwords)
+# ------------------------------------------------------------
+
+
+
 # 查詢語句
 while True:
     query = input("Input:\n")
     # 預處理查詢，為了讓查詢跟索引內容相同
     clean_query1 = query.split() 
     clean_query2 = list(''.join(tp.text_process(clean_query1)).split())
-    #print(clean_query1, clean_query2)
+    print(clean_query1, clean_query2)
     print('---------------------------\n')
-    # ----- 查詢館藏的關鍵字擷取 -----------------------------------
-    search_FJULIB_KEYWORD = ""
+
+    # ----- wikipedia 擴展關鍵詞 -------------------------------------
+    final_query = []
     for w in clean_query2:
-        if w not in vocab.keys():
-            search_FJULIB_KEYWORD += w
-    print('\n查詢館藏的關鍵字擷取：', search_FJULIB_KEYWORD)
-    # -------------------------------------------------------------
-    print('---------------------------\n')
-    results = query_tfidf(clean_query2, INV_INDEX)
+        if (w in total_wiki) and (w not in vocab.keys()):
+            # e.g. 品客、零食
+            wikiCategory_term = subCategory_dict[w]
+            query_term = custom_match_dict[wikiCategory_term]
+
+            final_query.append(query_term)
+
+        elif (w in total_wiki) and (w in vocab.keys()):
+            # e.g. 飲料、食物
+            final_query.append(w)
+
+        else:
+            # 沒有在 FAQ ，也沒有在 wiki
+            final_query.append(w)
+
+    print('Final_query =', final_query)
+    print('--------------------------------------------------------')
+
+
+    results = query_tfidf(final_query, INV_INDEX)
     for rank, res in enumerate(results):
-        if res[0]-1 == 529:
-            A_list[res[0]] += search_FJULIB_KEYWORD
-        print("排名 {:2d} DOCID {:8d} ClusterN {:8d} SCORE {:.3f} \n內容 {:}\n回覆 {:}\n".format(rank+1, res[0], res[0]-1, res[1], Q_list[res[0]][:50], A_list[res[0]]))
+
+        # ----- 查詢館藏的關鍵字擷取 -----------------------------------
+        if res[0] - 1 == 529:
+            search_FJULIB_KEYWORD = ""
+            for w in final_query: 
+                if w not in cluster529_stopwords:
+                    search_FJULIB_KEYWORD = w
+                    
+            print('\n查詢館藏的關鍵字擷取：', search_FJULIB_KEYWORD)
+            raw_res = A_list[res[0]]
+            final_res = raw_res + search_FJULIB_KEYWORD
+        else:
+            final_res = A_list[res[0]]
+        # -------------------------------------------------------------
+
+        print("排名 {:2d} DOCID {:8d} ClusterN {:8d} SCORE {:.3f} \n內容 {:}\n回覆 {:}\n".format(rank+1, res[0], res[0]-1, res[1], Q_list[res[0]][:50], final_res))
     print()
+    
