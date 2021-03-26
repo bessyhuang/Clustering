@@ -67,7 +67,6 @@ for term in norm_doc_str.split():
         vocab[term] = len(vocab)
 #print('已 正規化字彙 ( {} 個) \n的 索引： {}\n'.format(total_vocabs, vocab))
 
-
 # ====== doc_TF 儲存每個文件分別的字彙及詞頻Counter ======
 doc_TF = []
 for norm_doc_STRING in processed_docs:
@@ -134,6 +133,7 @@ class InvertedIndex:
         print('\n+++\t', self.doc_len[530], '個詞')
         """
 
+
     def num_docs(self):
         return self.total_num_docs
 
@@ -176,6 +176,7 @@ def query_tfidf(query, invindex, k=5):
             
             doc_len = invindex.doc_len[docid] #每個 doc 的長度
             tfidf_cal = log(1 + term_in_each_doc_TermFreqs) * log(N / term_show_in_N_docs) / sqrt(doc_len)
+
             scores[docid] += tfidf_cal
             i += 1
     return scores.most_common(k)
@@ -228,8 +229,9 @@ for i in wiki_GroupCategory_list:
 custom_match_dict = {
     '零食':'食物', '飲料':'飲料', 
     '系統':'電腦', '借閱證':'閱覽證', 
-    '館際':'館際互借', '團討室':'團體 討論室'
-    } # wiki_category : FAQ_vocab
+    '團討室':'團體 討論室', '互借':'館際 互借', 
+    '智慧財產權':'智財權'
+    } # wiki_category : FAQ_vocab 
 # ------------------------------------------------------------
 
 
