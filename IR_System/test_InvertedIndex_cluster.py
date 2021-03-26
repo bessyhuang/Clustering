@@ -225,7 +225,11 @@ for i in wiki_GroupCategory_list:
 # print('total_wiki = ', total_wiki)
 
 
-custom_match_dict = {'零食':'食物', '飲料':'飲料'} # wiki_category : FAQ_vocab
+custom_match_dict = {
+    '零食':'食物', '飲料':'飲料', 
+    '系統':'電腦', '借閱證':'閱覽證', 
+    '館際':'館際互借', '團討室':'團體 討論室'
+    } # wiki_category : FAQ_vocab
 # ------------------------------------------------------------
 
 
@@ -263,8 +267,17 @@ while True:
             # e.g. 飲料、食物
             final_query.append(w)
 
+        elif w in custom_match_dict.keys():
+            query_term = custom_match_dict[w]
+            if ' ' in query_term:
+                query_list = query_term.split()
+                for i in query_list:
+                    final_query.append(i)
+            else:
+                final_query.append(query_term)
+
         else:
-            # 沒有在 FAQ ，也沒有在 wiki
+            # 沒有在 FAQ ，也沒有在 wiki            
             final_query.append(w)
 
     print('Final_query =', final_query)
