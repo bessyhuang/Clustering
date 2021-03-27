@@ -14,6 +14,13 @@ FAQ_df["clean_msg"] = FAQ_df.content.apply(tp.text_process)
 zipped = zip(Q_WS_list, new_Cluster_list)
 Cluster_set = set(new_Cluster_list)
 
+cluster_index = defaultdict(int)
+for i in range(-1, len(Cluster_set) - 1):
+    cluster_index['Cluster {}'.format(i)] = i + 1
+# print(cluster_index)
+
+
+
 def SegList_ClusterGroup(zipped):
     Cluster_dict = defaultdict(list)
 	
@@ -79,6 +86,41 @@ for norm_doc_STRING in processed_docs:
     doc_TF.append(TF)
 #print(len(doc_TF) == len(set(new_Cluster_list)))
 print('---------------------------\n')
+
+
+
+
+# Cluster : N docs
+class Docs_in_Cluster:
+    def __init__(self, cluster_index, cluster_WS_list, cluster_Category_list):
+        self.cluster_index = cluster_index
+        
+        self.cluster_len = len(self.cluster_index)
+        self.cluster_doc_num = [[] for i in range(self.cluster_len)]
+        self.cluster_df = pd.DataFrame({'Q_WS': cluster_WS_list, 'Cat': cluster_Category_list})
+
+        sectors = self.cluster_df.groupby('Cat')
+        for ClusterN in self.cluster_index.keys():
+            Cluster_ID = self.cluster_index[ClusterN]
+            # print('====', ClusterN, Cluster_ID, len(list(sectors.get_group(ClusterN).Q_WS)))
+            docs_number = len(list(sectors.get_group(ClusterN).Q_WS))
+            self.cluster_doc_num[Cluster_ID].append(docs_number)
+
+    def clusterN_docs(self, cluster_name):
+        cluster_ID = cluster_index[cluster_name]
+        return self.cluster_doc_num[cluster_ID][0]
+
+    def __str__(self, cluster_name):
+        cluster_ID = cluster_index[cluster_name]
+
+        return f"The number of dosc in clusterN. ===> {self.cluster_doc_num}\n\n{cluster_name} ===> {self.cluster_doc_num[cluster_ID][0]} 個文件。\n"
+
+dd = Docs_in_Cluster(cluster_index, Q_WS_list, new_Cluster_list)
+# print(dd.__str__("Cluster 529"))
+
+# n = dd.clusterN_docs("Cluster 529")
+# print(n)
+
 
 
 
@@ -165,7 +207,22 @@ def query_tfidf(query, invindex, k=5):
     # scores 儲存了 docID 和他們的 TF-IDF分數
     scores = Counter()
     N = invindex.num_docs() # Cluster -1 ~ Cluster 529 => 531 個
-    
+
+    query_vector = []
+    query_term = []
+    for term in query:
+        if term in vocab:
+            term_show_in_N_docs = invindex.term_show_in_N_docs(term)
+            query_idf = log(N / term_show_in_N_docs)
+            query_vector.append(query_idf)
+            query_term.append(term)
+        else:
+            query_vector.append(0)
+            query_term.append(term)
+
+    print(query_vector)
+    print(query_term)
+    print('=====================================================\n\n')
     for term in query:
         i = 0
         term_show_in_N_docs = invindex.term_show_in_N_docs(term)
@@ -173,8 +230,12 @@ def query_tfidf(query, invindex, k=5):
         
         for docid in invindex.term_show_in_docids(term):
             term_in_each_doc_TermFreqs = invindex.term_in_each_doc_TermFreqs(term)[i]     
-            
+            term_Maxfreqs_in_doc = max(invindex.term_in_each_doc_TermFreqs(term))
+
             doc_len = invindex.doc_len[docid] #每個 doc 的長度
+
+            # tfidf_cal = (1 + log(term_in_each_doc_TermFreqs)) * log(N / term_show_in_N_docs) / doc_len
+            # tfidf_cal = (1 + log(term_in_each_doc_TermFreqs)) * log(N / term_show_in_N_docs) / sqrt(doc_len)
             tfidf_cal = log(1 + term_in_each_doc_TermFreqs) * log(N / term_show_in_N_docs) / sqrt(doc_len)
 
             scores[docid] += tfidf_cal
