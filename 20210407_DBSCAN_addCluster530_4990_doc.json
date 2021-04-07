@@ -1,0 +1,298 @@
+[{
+  "_id": {
+    "$oid": "606dcb6450f5f35708d80a26"
+  },
+  "LibraryName": "",
+  "ID": "1",
+  "Question": "請問是什麼?",
+  "Answer": "",
+  "Category": "查Wikipedia",
+  "Keyword": "false",
+  "RelatedQ": "false",
+  "A_WS": [],
+  "QA_WS": [],
+  "Q_WS": [
+    "請問",
+    "是",
+    "什麼",
+    "?"
+  ],
+  "A_NER": [],
+  "A_POS": [],
+  "A_WS | POS": [],
+  "QA_NER": [],
+  "QA_POS": [],
+  "QA_WS | POS": [],
+  "Q_NER": [],
+  "Q_POS": [
+    "VE",
+    "SHI",
+    "Nep",
+    "QUESTIONCATEGORY"
+  ],
+  "Q_WS | POS": [
+    "請問_VE",
+    "是_SHI",
+    "什麼_Nep",
+    "?_QUESTIONCATEGORY"
+  ],
+  "adjusted_Category": "查Wikipedia",
+  "new_Cluster": "Cluster 530"
+},{
+  "_id": {
+    "$oid": "606dcb6450f5f35708d80a27"
+  },
+  "LibraryName": "",
+  "ID": "2",
+  "Question": "我想查在維基百科是啥意思?",
+  "Answer": "",
+  "Category": "查Wikipedia",
+  "Keyword": "false",
+  "RelatedQ": "false",
+  "A_WS": [],
+  "QA_WS": [],
+  "Q_WS": [
+    "我",
+    "想",
+    "查",
+    "在",
+    "維基",
+    "百科",
+    "是",
+    "啥",
+    "意思",
+    "?"
+  ],
+  "A_NER": [],
+  "A_POS": [],
+  "A_WS | POS": [],
+  "QA_NER": [],
+  "QA_POS": [],
+  "QA_WS | POS": [],
+  "Q_NER": [],
+  "Q_POS": [
+    "Nh",
+    "VE",
+    "VE",
+    "P",
+    "Nb",
+    "Na",
+    "SHI",
+    "Nep",
+    "Na",
+    "QUESTIONCATEGORY"
+  ],
+  "Q_WS | POS": [
+    "我_Nh",
+    "想_VE",
+    "查_VE",
+    "在_P",
+    "維基_Nb",
+    "百科_Na",
+    "是_SHI",
+    "啥_Nep",
+    "意思_Na",
+    "?_QUESTIONCATEGORY"
+  ],
+  "adjusted_Category": "查Wikipedia",
+  "new_Cluster": "Cluster 530"
+},{
+  "_id": {
+    "$oid": "606dcb6450f5f35708d80a28"
+  },
+  "LibraryName": "",
+  "ID": "3",
+  "Question": "查wiki",
+  "Answer": "",
+  "Category": "查Wikipedia",
+  "Keyword": "false",
+  "RelatedQ": "false",
+  "A_WS": [],
+  "QA_WS": [],
+  "Q_WS": [
+    "查",
+    "wiki"
+  ],
+  "A_NER": [],
+  "A_POS": [],
+  "A_WS | POS": [],
+  "QA_NER": [],
+  "QA_POS": [],
+  "QA_WS | POS": [],
+  "Q_NER": [],
+  "Q_POS": [
+    "VE",
+    "FW"
+  ],
+  "Q_WS | POS": [
+    "查_VE",
+    "wiki_FW"
+  ],
+  "adjusted_Category": "查Wikipedia",
+  "new_Cluster": "Cluster 530"
+},{
+  "_id": {
+    "$oid": "606dcb6450f5f35708d80a29"
+  },
+  "LibraryName": "",
+  "ID": "4",
+  "Question": "查wikipedia",
+  "Answer": "",
+  "Category": "查Wikipedia",
+  "Keyword": "false",
+  "RelatedQ": "false",
+  "A_WS": [],
+  "QA_WS": [],
+  "Q_WS": [
+    "查",
+    "wikipedia"
+  ],
+  "A_NER": [],
+  "A_POS": [],
+  "A_WS | POS": [],
+  "QA_NER": [],
+  "QA_POS": [],
+  "QA_WS | POS": [],
+  "Q_NER": [],
+  "Q_POS": [
+    "VE",
+    "FW"
+  ],
+  "Q_WS | POS": [
+    "查_VE",
+    "wikipedia_FW"
+  ],
+  "adjusted_Category": "查Wikipedia",
+  "new_Cluster": "Cluster 530"
+},{
+  "_id": {
+    "$oid": "606dcb6450f5f35708d80a2a"
+  },
+  "LibraryName": "",
+  "ID": "5",
+  "Question": "在維基的定義？",
+  "Answer": "",
+  "Category": "查Wikipedia",
+  "Keyword": "false",
+  "RelatedQ": "false",
+  "A_WS": [],
+  "QA_WS": [],
+  "Q_WS": [
+    "在",
+    "維基",
+    "的",
+    "定義",
+    "？"
+  ],
+  "A_NER": [],
+  "A_POS": [],
+  "A_WS | POS": [],
+  "QA_NER": [],
+  "QA_POS": [],
+  "QA_WS | POS": [],
+  "Q_NER": [],
+  "Q_POS": [
+    "P",
+    "Nb",
+    "DE",
+    "Na",
+    "QUESTIONCATEGORY"
+  ],
+  "Q_WS | POS": [
+    "在_P",
+    "維基_Nb",
+    "的_DE",
+    "定義_Na",
+    "？_QUESTIONCATEGORY"
+  ],
+  "adjusted_Category": "查Wikipedia",
+  "new_Cluster": "Cluster 530"
+},{
+  "_id": {
+    "$oid": "606dcb6450f5f35708d80a2b"
+  },
+  "LibraryName": "",
+  "ID": "6",
+  "Question": "甚麼意思？",
+  "Answer": "",
+  "Category": "查Wikipedia",
+  "Keyword": "false",
+  "RelatedQ": "false",
+  "A_WS": [],
+  "QA_WS": [],
+  "Q_WS": [
+    "甚麼",
+    "意思",
+    "？"
+  ],
+  "A_NER": [],
+  "A_POS": [],
+  "A_WS | POS": [],
+  "QA_NER": [],
+  "QA_POS": [],
+  "QA_WS | POS": [],
+  "Q_NER": [],
+  "Q_POS": [
+    "Nep",
+    "Na",
+    "QUESTIONCATEGORY"
+  ],
+  "Q_WS | POS": [
+    "甚麼_Nep",
+    "意思_Na",
+    "？_QUESTIONCATEGORY"
+  ],
+  "adjusted_Category": "查Wikipedia",
+  "new_Cluster": "Cluster 530"
+},{
+  "_id": {
+    "$oid": "606dcb6450f5f35708d80a2c"
+  },
+  "LibraryName": "",
+  "ID": "7",
+  "Question": "我想查這個術語的解釋",
+  "Answer": "",
+  "Category": "查Wikipedia",
+  "Keyword": "false",
+  "RelatedQ": "false",
+  "A_WS": [],
+  "QA_WS": [],
+  "Q_WS": [
+    "我",
+    "想",
+    "查",
+    "這個",
+    "術語",
+    "的",
+    "解釋"
+  ],
+  "A_NER": [],
+  "A_POS": [],
+  "A_WS | POS": [],
+  "QA_NER": [],
+  "QA_POS": [],
+  "QA_WS | POS": [],
+  "Q_NER": [],
+  "Q_POS": [
+    "Nh",
+    "VE",
+    "VE",
+    "Nep",
+    "Nf",
+    "Na",
+    "DE",
+    "Na"
+  ],
+  "Q_WS | POS": [
+    "我_Nh",
+    "想_VE",
+    "查_VE",
+    "這_Nep",
+    "個_Nf",
+    "術語_Na",
+    "的_DE",
+    "解釋_Na"
+  ],
+  "adjusted_Category": "查Wikipedia",
+  "new_Cluster": "Cluster 530"
+}]
