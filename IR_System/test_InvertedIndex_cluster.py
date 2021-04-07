@@ -4,6 +4,7 @@ import pandas as pd
 
 from collections import Counter, defaultdict
 import pickle
+import wptools
 
 Question_list, Q_WS_list, A_WS_list, Answer_list, new_Cluster_list, AllField_list = PymongoCM.get_mongodb_row("Library", "FAQ")
 FAQ_df = pd.DataFrame({"content": Q_WS_list, "new_Cluster": new_Cluster_list, "answer": Answer_list})
@@ -195,7 +196,7 @@ class InvertedIndex:
 	
 # Inverted Index 相關訊息
 INV_INDEX = InvertedIndex(vocab, doc_TF)
-print("Number of documents (Cluster -1 ~ Cluster 529) = {}".format(INV_INDEX.num_docs()))
+print("Number of documents (Cluster -1 ~ Cluster 530) = {}".format(INV_INDEX.num_docs()))
 print("Number of unique terms = {}".format(INV_INDEX.vocab_len))
 
 
@@ -304,7 +305,13 @@ for ws in Cluster529:
     cluster529_stopwords.add(ws)
 # print('***', cluster529_stopwords)
 # ------------------------------------------------------------
-
+# ----- 查詢Wikipedia的停用詞擷取 ------------------------------
+cluster530_stopwords = set()
+Cluster530 = list(sectors.get_group('Cluster 530').content)[0]
+for ws in Cluster530:
+    cluster530_stopwords.add(ws)
+# print('***', cluster530_stopwords)
+# ------------------------------------------------------------
 
 
 # 查詢語句
@@ -360,6 +367,42 @@ while True:
             print('\n查詢館藏的關鍵字擷取：', search_FJULIB_KEYWORD)
             raw_res = A_list[res[0]]
             final_res = raw_res + search_FJULIB_KEYWORD
+
+        # ----- 查詢Wikipedia的停用詞擷取 ------------------------------
+        elif res[0] - 1 == 530:
+            search_WIKI_KEYWORD = ""
+            for w in final_query: 
+                if w not in cluster530_stopwords:
+                    search_WIKI_KEYWORD = w
+                    
+            print('\n查詢 Wikipedia 的關鍵字擷取：', search_WIKI_KEYWORD)
+            raw_res = A_list[res[0]]
+
+            # 分類標籤
+            # page = wptools.page(search_WIKI_KEYWORD, lang='zh').get_more()
+            # c = page.data['categories']
+            # final_res = c #raw_res + search_WIKI_KEYWORD
+
+            # 資訊框
+            # page = wptools.page(search_WIKI_KEYWORD, lang='zh').get_parse()
+            # wikitext = page.data['infobox']
+            # for key in page.data['infobox']:
+            #     print(key, '\t', page.data['infobox'][key])
+            # final_res = wikitext
+
+            # wikidata (資料不齊全)
+            # page = wptools.page(search_WIKI_KEYWORD, lang='zh').get_wikidata() #, wikibase='Q51101'
+            # wikidata = page.data['wikidata']
+            # for key in page.data['wikidata']:
+            #     print(key, '\t', page.data['wikidata'][key], '\n')
+            # final_res = wikidata
+
+            # 摘要
+            page1 = wptools.page(search_WIKI_KEYWORD, lang='zh').get_restbase('/page/summary/')
+            summary = page1.data['exrest']
+            wikiURL = page1.data['url']
+            final_res = summary + '\n' + wikiURL
+
         else:
             final_res = A_list[res[0]]
         # -------------------------------------------------------------
