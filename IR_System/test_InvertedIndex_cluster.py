@@ -3,8 +3,10 @@ import text_preprocess as tp
 import pandas as pd
 
 from collections import Counter, defaultdict
+from opencc import OpenCC
 import pickle
 import wptools
+
 
 Question_list, Q_WS_list, A_WS_list, Answer_list, new_Cluster_list, AllField_list = PymongoCM.get_mongodb_row("Library", "FAQ")
 FAQ_df = pd.DataFrame({"content": Q_WS_list, "new_Cluster": new_Cluster_list, "answer": Answer_list})
@@ -401,7 +403,9 @@ while True:
             page1 = wptools.page(search_WIKI_KEYWORD, lang='zh').get_restbase('/page/summary/')
             summary = page1.data['exrest']
             wikiURL = page1.data['url']
-            final_res = summary + '\n' + wikiURL
+
+            cc = OpenCC('s2twp')
+            final_res = cc.convert(summary) + '\n' + wikiURL
 
         else:
             final_res = A_list[res[0]]
