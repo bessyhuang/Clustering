@@ -8,3 +8,5 @@ __pycache__
 /SimpleTransformers-practice/outputs
 /SimpleTransformers-practice/runs
 /SimpleTransformers-practice/cache_dir
+
+/Word2Vec-practice/word2vec_zhwiki_plus_Q.model
